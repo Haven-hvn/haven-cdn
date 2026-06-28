@@ -51,8 +51,8 @@ The user's EVM wallet (via MetaMask, WalletConnect, etc.) acts as their network 
 **2. Waku Signaling Layer**
 Because browsers cannot participate in the IPFS DHT (they cannot accept inbound connections), the package uses Waku for out-of-band discovery and WebRTC signaling.
 - Peers subscribe to a Waku content topic based on the application's token contract address.
-- Peers broadcast presence and multiaddrs to this topic.
-- WebRTC SDP offers and answers are exchanged via Waku direct messages.
+- Peers broadcast presence, multiaddrs, and active CIDs to this topic.
+- WebRTC SDP offers and answers are exchanged as Waku relay messages on the public content topic.
 - Waku's RLN (Rate Limiting Nullifiers) provides economic security, preventing signaling spam without requiring centralized servers.
 
 **3. Helia Data Plane**
@@ -96,7 +96,7 @@ The system uses a three-tier thermal hierarchy to match storage economics to dem
 - **Bandwidth proof systems & TEE attestation.** Availability is demonstrated by nodes being online and responsive. Content integrity is verified by local hashing.
 - **Centralized WebRTC Trackers.** Replaced by Waku's decentralized, economically secured pub/sub network.
 - **Network-layer token-gating.** Routing is open to maximize IPFS network effects and CDN performance. Access control is pushed entirely to the edge (Haven AOL).
-- **Protocol-level reputation systems.** Bitswap's built-in ledger handles malicious peers locally. Waku's RLN handles network spam cryptographically.
+- **Protocol-level reputation systems.** Bitswap's built-in ledger handles malicious peers locally. Waku's RLN handles network spam cryptologically.
 - **Erasure coding.** Standard UnixFS full-block replication is used instead. The Warm and Hot layers guarantee availability; browsers are ephemeral caches, not persistent storage arrays.
 
 ## Federation Path
